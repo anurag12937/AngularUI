@@ -1,0 +1,42 @@
+<div class="mat-elevation-z8" style="margin-left:5%">
+    <mat-form-field>
+      <mat-label>Search by Title</mat-label>
+      <input (keyup)="applySearch($event)" matInput  style="background-color: black;" >
+    </mat-form-field>
+     <mat-spinner *ngIf = "isLoading"></mat-spinner> 
+  <table mat-table  [dataSource]="dataSource"  class="mat-elevation-z8" style="margin-top: 5%;">
+    
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell  *matHeaderCellDef> Id </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+  
+    <!-- title Column -->
+    <ng-container matColumnDef="title">
+      <th  mat-header-cell *matHeaderCellDef> Title </th>
+      <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+    </ng-container>
+  
+    <!-- type Column -->
+    <ng-container matColumnDef="type">
+      <th  mat-header-cell *matHeaderCellDef> Type </th>
+      <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+    </ng-container>
+  
+    <!-- URL Column -->
+    <ng-container matColumnDef="url">
+      <th mat-header-cell *matHeaderCellDef> Url </th>
+      <td mat-cell *matCellDef="let element" ><a style="color: aliceblue;" [href]="element.url" target="_blank">{{element.url}}</a></td>
+    </ng-container>
+
+    <tr mat-sort-header mat-header-row *matHeaderRowDef="displayedColumns" style="background-color: rgba(0, 0, 255, 0.196);border: solid;"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" style="border: solid;padding: 1px; text-emphasis-color: black;"></tr>
+
+  </table>
+  <mat-paginator   [pageSizeOptions]="[5,10,20,50]" showFirstLastButtons style="background-color:rgba(42, 42, 186, 0.763);border: solid;">
+  </mat-paginator>
+</div>
